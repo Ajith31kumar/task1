@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f6;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container,
+        .success-container {
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .success-container {
+            display: none;
+        }
+
+        h2, h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div id="result" class="error"></div>
+    </div>
+
+    <div class="success-container">
+        <h1>Login Successful!</h1>
+        <p><strong>Username:</strong> <span id="successUsername"></span></p>
+        <p><strong>Password:</strong> <span id="successPassword"></span></p>
+    </div>
+
+    <script>
+        const loginContainer = document.querySelector('.login-container');
+        const successContainer = document.querySelector('.success-container');
+        const loginForm = document.getElementById('loginForm');
+        const resultDiv = document.getElementById('result');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username && password) {
+                // Hide the login container and show the success container
+                loginContainer.style.display = 'none';
+                successContainer.style.display = 'block';
+                
+                // Display the retrieved data
+                document.getElementById('successUsername').textContent = username;
+                document.getElementById('successPassword').textContent = password;
+            } else {
+                resultDiv.textContent = 'Please enter both username and password.';
+            }
+        });
+    </script>
+</body>
+</html>
